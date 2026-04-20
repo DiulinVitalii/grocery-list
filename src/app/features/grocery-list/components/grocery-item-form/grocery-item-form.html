@@ -1,0 +1,64 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  (keydown.escape)="cancellable() ? onCancel() : null"
+  class="flex flex-col gap-2 md:flex-row md:items-start"
+  novalidate
+>
+  <mat-form-field appearance="outline" class="flex-1">
+    <mat-label>Item</mat-label>
+    <input matInput formControlName="title" autocomplete="off" [attr.maxlength]="titleMaxLength" />
+    @if (form.controls.title.touched && form.controls.title.invalid) {
+      <mat-error>
+        @if (form.controls.title.hasError('required')) {
+          Item name is required.
+        }
+      </mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="md:w-32">
+    <mat-label>Amount</mat-label>
+    <input
+      matInput
+      type="number"
+      inputmode="numeric"
+      formControlName="amount"
+      [attr.min]="amountMin"
+      [attr.max]="amountMax"
+      step="1"
+    />
+    @if (form.controls.amount.touched && form.controls.amount.invalid) {
+      <mat-error>
+        @if (form.controls.amount.hasError('required')) {
+          Amount is required.
+        } @else if (form.controls.amount.hasError('min')) {
+          Amount must be at least {{ amountMin }}.
+        } @else if (form.controls.amount.hasError('max')) {
+          Amount must be {{ amountMax }} or less.
+        }
+      </mat-error>
+    }
+  </mat-form-field>
+
+  <div class="flex gap-2 md:items-start md:pt-1.5">
+    <button
+      matButton="filled"
+      type="submit"
+      class="min-w-24"
+      [disabled]="form.invalid || submitting()"
+    >
+      @if (submitting()) {
+        <mat-progress-spinner mode="indeterminate" diameter="18" />
+      } @else {
+        {{ submitLabel() }}
+      }
+    </button>
+
+    @if (cancellable()) {
+      <button matButton type="button" [disabled]="submitting()" (click)="onCancel()">
+        {{ cancelLabel() }}
+      </button>
+    }
+  </div>
+</form>

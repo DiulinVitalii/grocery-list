@@ -1,0 +1,44 @@
+@let current = item();
+
+<div
+  class="flex items-center gap-2 rounded-lg border border-[color:var(--mat-sys-outline-variant)] bg-[color:var(--mat-sys-surface-container-low)] p-2 pl-3"
+>
+  <mat-checkbox
+    [checked]="current.bought"
+    [attr.aria-label]="
+      current.bought
+        ? 'Mark ' + current.title + ' as not bought'
+        : 'Mark ' + current.title + ' as bought'
+    "
+    (change)="onBoughtToggle(current, $event.checked)"
+  />
+
+  <div class="flex min-w-0 flex-1 items-baseline justify-between gap-3">
+    <span
+      class="truncate text-base"
+      [class.line-through]="current.bought"
+      [class.opacity-60]="current.bought"
+    >
+      {{ current.title }}
+    </span>
+    <span class="shrink-0 text-sm opacity-70 tabular-nums"> × {{ current.amount }} </span>
+  </div>
+
+  <button
+    matIconButton
+    type="button"
+    [attr.aria-label]="'Edit ' + current.title"
+    (click)="editRequest.emit(current)"
+  >
+    <mat-icon>edit</mat-icon>
+  </button>
+
+  <button
+    matIconButton
+    type="button"
+    [attr.aria-label]="'Delete ' + current.title"
+    (click)="deleteRequest.emit(current)"
+  >
+    <mat-icon>delete</mat-icon>
+  </button>
+</div>

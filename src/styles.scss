@@ -1,0 +1,36 @@
+@use '@angular/material' as mat;
+
+$theme: mat.define-theme(
+  (
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: (
+      brand-family: Roboto,
+      plain-family: Roboto,
+    ),
+    density: (
+      scale: 0,
+    ),
+  )
+);
+
+@include mat.core();
+
+:root {
+  height: 100%;
+  @include mat.theme($theme);
+}
+
+@include mat.all-component-themes($theme);
+
+body {
+  color-scheme: light;
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+  margin: 0;
+  height: 100%;
+}

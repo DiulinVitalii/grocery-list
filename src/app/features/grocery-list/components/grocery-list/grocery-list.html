@@ -1,0 +1,23 @@
+<ul class="flex list-none flex-col gap-2 p-0" role="list">
+  @for (entry of items(); track entry.id) {
+    <li>
+      @if (entry.id === editingId()) {
+        <app-grocery-item-form
+          [initialValue]="{ title: entry.title, amount: entry.amount }"
+          submitLabel="Save"
+          [cancellable]="true"
+          [submitting]="saving()"
+          (formSubmit)="onFormSubmit(entry.id, $event)"
+          (formCancel)="cancelEdit.emit()"
+        />
+      } @else {
+        <app-grocery-list-item
+          [item]="entry"
+          (editRequest)="editRequest.emit($event)"
+          (deleteRequest)="deleteRequest.emit($event)"
+          (boughtChange)="boughtChange.emit($event)"
+        />
+      }
+    </li>
+  }
+</ul>

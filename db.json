@@ -1,0 +1,61 @@
+{
+  "items": [
+    {
+      "id": "e5f6a7b8",
+      "title": "Sourdough bread",
+      "amount": 1,
+      "bought": false,
+      "createdAt": "2026-04-15T08:13:10.000Z",
+      "updatedAt": "2026-04-20T19:28:35.526Z"
+    },
+    {
+      "id": "c9d0e1f2",
+      "title": "Apples",
+      "amount": 6,
+      "bought": true,
+      "createdAt": "2026-04-15T08:14:22.000Z",
+      "updatedAt": "2026-04-20T19:17:37.126Z"
+    },
+    {
+      "id": "3a4b5c6d",
+      "title": "Eggs",
+      "amount": 11,
+      "bought": true,
+      "createdAt": "2026-04-16T07:45:00.000Z",
+      "updatedAt": "2026-04-20T19:23:10.689Z"
+    },
+    {
+      "id": "7e8f9a0b",
+      "title": "Olive oil",
+      "amount": 1,
+      "bought": true,
+      "createdAt": "2026-04-17T10:31:05.000Z",
+      "updatedAt": "2026-04-20T19:17:57.775Z"
+    },
+    {
+      "id": "1c2d3e4f",
+      "title": "Coffee beans",
+      "amount": 1,
+      "bought": false,
+      "createdAt": "2026-04-17T11:05:17.000Z",
+      "updatedAt": "2026-04-20T19:25:34.929Z"
+    },
+    {
+      "title": "Milk",
+      "amount": 1,
+      "bought": true,
+      "createdAt": "2026-04-20T18:04:48.973Z",
+      "updatedAt": "2026-04-20T19:17:46.788Z",
+      "id": "PECUY10hls8"
+    },
+    {
+      "title": "Orange",
+      "amount": 3,
+      "bought": true,
+      "createdAt": "2026-04-20T19:07:51.768Z",
+      "updatedAt": "2026-04-20T19:17:39.292Z",
+      "id": "WWQaSqlsymU"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

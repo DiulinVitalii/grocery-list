@@ -1,0 +1,58 @@
+<section class="flex flex-col gap-4">
+  <header class="flex flex-wrap items-baseline justify-between gap-2">
+    <div>
+      <h1 class="text-2xl font-medium">My grocery list</h1>
+      <p class="text-sm opacity-70">Items to buy on your next trip.</p>
+    </div>
+    @if (boughtSummary(); as summary) {
+      <p class="text-sm opacity-70 tabular-nums" aria-live="polite">
+        {{ summary.bought }} of {{ summary.total }} bought
+      </p>
+    }
+  </header>
+
+  <app-grocery-item-form [submitting]="creating()" (formSubmit)="onAddItem($event)" />
+
+  @if (itemsResource.error()) {
+    <div
+      class="flex flex-col items-center gap-3 rounded-lg border border-[color:var(--mat-sys-outline-variant)] p-8 text-center"
+      role="alert"
+    >
+      <mat-icon class="!text-[40px] !leading-10" color="warn">error_outline</mat-icon>
+      <div>
+        <p class="font-medium">We couldn’t load your list.</p>
+        <p class="text-sm opacity-70">Please check your connection and try again.</p>
+      </div>
+      <button matButton="filled" type="button" (click)="itemsResource.reload()">
+        <mat-icon>refresh</mat-icon>
+        <span>Try again</span>
+      </button>
+    </div>
+  } @else if (itemsResource.isLoading() && !itemsResource.hasValue()) {
+    <div class="flex items-center justify-center p-10" aria-busy="true" aria-live="polite">
+      <mat-progress-spinner mode="indeterminate" diameter="40" />
+      <span class="sr-only">Loading your grocery list</span>
+    </div>
+  } @else if (itemsResource.value()) {
+    @if (itemsResource.value()?.length === 0) {
+      <div
+        class="flex flex-col items-center gap-2 rounded-lg border border-dashed border-[color:var(--mat-sys-outline-variant)] p-10 text-center"
+      >
+        <mat-icon class="!text-[40px] !leading-10 opacity-60">shopping_cart</mat-icon>
+        <p class="font-medium">Your list is empty</p>
+        <p class="text-sm opacity-70">Add your first item to get started.</p>
+      </div>
+    } @else {
+      <app-grocery-list
+        [items]="itemsResource.value()"
+        [editingId]="editingId()"
+        [saving]="saving()"
+        (editRequest)="onEditRequest($event)"
+        (editSubmit)="onEditSubmit($event)"
+        (cancelEdit)="onEditCancel()"
+        (deleteRequest)="onDeleteRequest($event)"
+        (boughtChange)="onBoughtChange($event)"
+      />
+    }
+  }
+</section>
